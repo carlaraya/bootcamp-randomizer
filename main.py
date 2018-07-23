@@ -17,3 +17,8 @@ while True:
     print(logos[assigned_team])
     with open('groupings.txt', 'a') as groupings:
         groupings.write('%s : %s\n' % (name, assigned_team))
+
+with open('groupings.txt', 'r') as groupings, open('groupings_sorted.txt', 'w') as groupings_sorted:
+    gs = groupings.read().strip().split('\n')
+    gs = [team + '\n' + '\n'.join([g.split(' : ')[0] for g in gs if team in g]) + '\n' for team in logos]
+    groupings_sorted.write('\n'.join(gs))
